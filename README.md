@@ -95,6 +95,19 @@ Ejemplos de perfiles disponibles:
 | tecnico1 | Técnico |
 | usuario1 | Usuario |
 
+
+## Características principales
+
+- Gestión de tickets de soporte TI.
+- Control de acceso por roles (Administrador, Técnico y Usuario).
+- Asignación de tickets a técnicos.
+- Seguimiento del estado de los tickets.
+- Registro de auditoría.
+- Estadísticas mediante gráficos.
+- Exportación de información en PDF y Excel.
+- Gestión de perfiles de usuario.
+
+
 ## Ejecución del sistema
 
 1. Instalar dependencias:
