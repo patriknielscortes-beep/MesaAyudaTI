@@ -1,0 +1,374 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Detalle Ticket
+{% endblock %}
+
+
+{% block contenido %}
+
+
+<div class="container mt-4">
+
+
+    <!-- INFORMACIÓN DEL TICKET -->
+
+    <div class="card shadow mb-4">
+
+
+        <div class="card-header bg-primary text-white">
+
+            🎫 Ticket #{{ ticket[0] }}
+
+        </div>
+
+
+
+        <div class="card-body">
+
+
+            <h3>
+                {{ ticket[1] }}
+            </h3>
+
+
+
+            <p class="text-muted">
+                {{ ticket[2] }}
+            </p>
+
+
+
+            <div class="row">
+
+
+                <div class="col-md-4">
+
+
+                    <strong>
+                        Prioridad:
+                    </strong>
+
+
+                    {% if ticket[3]=="Alta" %}
+
+                    <span class="badge bg-danger">
+                        🔴 Alta
+                    </span>
+
+
+                    {% elif ticket[3]=="Media" %}
+
+
+                    <span class="badge bg-warning text-dark">
+                        🟡 Media
+                    </span>
+
+
+                    {% else %}
+
+
+                    <span class="badge bg-success">
+                        🟢 Baja
+                    </span>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <div class="col-md-4">
+
+
+                    <strong>
+                        Estado:
+                    </strong>
+
+
+                    {% if ticket[4]=="Abierto" %}
+
+                    <span class="badge bg-danger">
+                        🔴 Abierto
+                    </span>
+
+
+                    {% elif ticket[4]=="En Proceso" %}
+
+
+                    <span class="badge bg-warning text-dark">
+                        🟡 En Proceso
+                    </span>
+
+
+                    {% else %}
+
+
+                    <span class="badge bg-success">
+                        🟢 Cerrado
+                    </span>
+
+
+                    {% endif %}
+
+
+
+                </div>
+
+
+
+                <div class="col-md-4">
+
+                    <strong>
+                        Fecha:
+                    </strong>
+
+                    {{ ticket[5] }}
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ASIGNAR TECNICO -->
+
+            {% if session.get("rol") == "admin" %}
+
+            <div class="mt-4">
+
+                <a href="/asignar_tecnico/{{ ticket[0] }}"
+                   class="btn btn-warning">
+
+                    <i class="bi bi-person-plus"></i>
+
+                    Asignar Técnico
+
+                </a>
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- CHAT -->
+
+
+    <div class="card shadow mb-4">
+
+
+        <div class="card-header bg-dark text-white">
+
+            💬 Conversación del ticket
+
+        </div>
+
+
+
+        <div class="card-body"
+             style="max-height:500px; overflow-y:auto;">
+
+
+
+        {% for comentario in comentarios %}
+
+
+
+            {% if comentario[0] == session["usuario"] %}
+
+
+            <!-- MENSAJE PROPIO -->
+
+
+            <div class="d-flex justify-content-end mb-3">
+
+
+                <div class="card bg-primary text-white"
+                     style="max-width:70%;">
+
+
+                    <div class="card-body">
+
+
+                        <strong>
+                            👤 {{ comentario[0] }}
+                        </strong>
+
+
+                        <small class="d-block">
+
+                            {{ comentario[2] }}
+
+                        </small>
+
+
+                        <hr>
+
+
+                        <p class="mb-0">
+
+                            {{ comentario[1] }}
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            {% else %}
+
+
+
+            <!-- MENSAJE OTRO USUARIO -->
+
+
+            <div class="d-flex justify-content-start mb-3">
+
+
+                <div class="card bg-light"
+                     style="max-width:70%;">
+
+
+                    <div class="card-body">
+
+
+                        <strong>
+                            🛠 {{ comentario[0] }}
+                        </strong>
+
+
+                        <small class="d-block text-muted">
+
+                            {{ comentario[2] }}
+
+                        </small>
+
+
+                        <hr>
+
+
+                        <p class="mb-0">
+
+                            {{ comentario[1] }}
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            {% endif %}
+
+
+
+        {% else %}
+
+
+            <p class="text-muted text-center">
+
+                No existen mensajes todavía.
+
+            </p>
+
+
+        {% endfor %}
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    <!-- RESPONDER -->
+
+
+    <div class="card shadow">
+
+
+        <div class="card-header">
+
+            ✍️ Responder ticket
+
+        </div>
+
+
+
+        <div class="card-body">
+
+
+            <form method="POST">
+
+
+                <textarea
+                    name="comentario"
+                    class="form-control"
+                    rows="3"
+                    placeholder="Escriba una respuesta..."
+                    required></textarea>
+
+
+
+                <button
+                    class="btn btn-primary mt-3">
+
+                    📩 Enviar mensaje
+
+                </button>
+
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <a href="/ver_tickets"
+       class="btn btn-secondary mt-3">
+
+        ⬅ Volver a tickets
+
+    </a>
+
+
+
+</div>
+
+
+{% endblock %}

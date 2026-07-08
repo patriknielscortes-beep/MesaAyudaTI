@@ -1,0 +1,79 @@
+body{
+    background:#f4f6f9;
+    font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+}
+
+.navbar{
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.btn{
+    border-radius:10px;
+}
+
+.table{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.table thead{
+    background:#0d6efd;
+    color:white;
+}
+
+.badge{
+    font-size:14px;
+}
+
+.footer{
+    text-align:center;
+    margin-top:30px;
+    color:gray;
+}
+
+.dashboard-card{
+    color:white;
+    border-radius:15px;
+    padding:25px;
+}
+
+.bg-total{
+    background:#0d6efd;
+}
+
+.bg-abierto{
+    background:#dc3545;
+}
+
+.bg-proceso{
+    background:#ffc107;
+    color:black;
+}
+
+.bg-cerrado{
+    background:#198754;
+}
+
+.dashboard-card h2{
+    font-size:40px;
+    font-weight:bold;
+}
+
+.dashboard-card i{
+    font-size:45px;
+    float:right;
+    opacity:.3;
+}

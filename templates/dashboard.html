@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Dashboard - Mesa de Ayuda TI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h2>Mesa de Ayuda TI</h2>
+
+            <h5>
+                Bienvenido {{ usuario }}
+            </h5>
+
+            <h5>Usuario: {{ usuario }}</h5>
+            <h6>Rol: {{ rol }}</h6>
+
+            <hr>
+
+            <a href="/crear_ticket" class="btn btn-success">
+                Crear Ticket
+            </a>
+
+            <a href="/ver_tickets" class="btn btn-primary">
+                Ver Tickets
+            </a>
+
+            <a href="/estadisticas" class="btn btn-warning">
+                Estadísticas
+            </a>
+
+            <a href="/logout" class="btn btn-danger">
+                Cerrar Sesión
+            </a>
+
+            <a href="/exportar_excel" class="btn btn-success">
+            Exportar Excel
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+</html>

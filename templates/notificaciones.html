@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Notificaciones
+{% endblock %}
+
+
+{% block contenido %}
+
+
+<div class="container mt-4">
+
+
+<div class="card shadow">
+
+
+<div class="card-header bg-primary text-white">
+
+🔔 Mis Notificaciones
+
+</div>
+
+
+<div class="card-body">
+
+
+{% if avisos %}
+
+
+{% for aviso in avisos %}
+
+
+<div class="alert alert-info d-flex justify-content-between align-items-center">
+
+
+<div>
+
+<strong>
+🔔 Aviso
+</strong>
+
+<br>
+
+{{ aviso[1] }}
+
+<br>
+
+<small class="text-muted">
+
+{{ aviso[2] }}
+
+</small>
+
+</div>
+
+
+{% if aviso[3] == 0 %}
+
+<span class="badge bg-danger">
+Nuevo
+</span>
+
+{% else %}
+
+<span class="badge bg-secondary">
+Leído
+</span>
+
+{% endif %}
+
+
+</div>
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+
+<div class="text-center text-muted">
+
+No tienes notificaciones.
+
+</div>
+
+
+{% endif %}
+
+
+
+</div>
+
+
+</div>
+
+
+
+<a href="/ver_tickets"
+class="btn btn-secondary mt-3">
+
+⬅ Volver
+
+</a>
+
+
+
+</div>
+
+
+{% endblock %}

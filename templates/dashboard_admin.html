@@ -1,0 +1,693 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Dashboard Administrador
+{% endblock %}
+
+
+{% block contenido %}
+
+<div class="container-fluid mt-4">
+
+
+<!-- TITULO -->
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>
+        <i class="bi bi-speedometer2"></i>
+        Panel de Administración
+    </h2>
+
+</div>
+
+
+
+<!-- ALERTA TICKETS URGENTES -->
+
+{% if tickets_urgentes > 0 %}
+
+<div class="alert alert-danger shadow">
+
+    <i class="bi bi-exclamation-triangle-fill"></i>
+
+    Existen 
+    <strong>{{ tickets_urgentes }}</strong>
+    tickets de prioridad alta pendientes.
+
+</div>
+
+{% endif %}
+
+
+
+
+<!-- TARJETAS PRINCIPALES -->
+
+<div class="row g-4">
+
+    <!-- TOTAL -->
+
+    <div class="col-md-3">
+
+        <div class="dashboard-card bg-total text-center p-4 shadow">
+
+            <i class="bi bi-ticket-detailed-fill fs-1"></i>
+
+            <h6 class="mt-2">
+                Total Tickets
+            </h6>
+
+            <h2>
+                {{ total }}
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- ABIERTOS -->
+
+    <div class="col-md-3">
+
+        <div class="dashboard-card bg-abierto text-center p-4 shadow">
+
+            <i class="bi bi-folder2-open fs-1"></i>
+
+            <h6 class="mt-2">
+                Abiertos
+            </h6>
+
+            <h2>
+                {{ abiertos }}
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- EN PROCESO -->
+
+    <div class="col-md-3">
+
+        <div class="dashboard-card bg-proceso text-center p-4 shadow">
+
+            <i class="bi bi-hourglass-split fs-1"></i>
+
+            <h6 class="mt-2">
+                En Proceso
+            </h6>
+
+            <h2>
+                {{ proceso }}
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- CERRADOS -->
+
+    <div class="col-md-3">
+
+        <div class="dashboard-card bg-cerrado text-center p-4 shadow">
+
+            <i class="bi bi-check-circle-fill fs-1"></i>
+
+            <h6 class="mt-2">
+                Cerrados
+            </h6>
+
+            <h2>
+                {{ cerrados }}
+            </h2>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<!-- TIEMPO PROMEDIO -->
+
+<div class="row mt-4">
+
+
+<div class="col-md-12">
+
+
+<div class="card shadow">
+
+
+<div class="card-header bg-info text-white">
+
+    <i class="bi bi-clock-history"></i>
+
+    Tiempo Promedio de Resolución
+
+</div>
+
+
+<div class="card-body text-center">
+
+<h1>
+
+{{ promedio_horas }}
+
+<small>
+horas
+</small>
+</h1>
+
+<p class="text-muted mb-0">
+
+Tiempo promedio que demora un ticket cerrado.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TABLA Y RANKING -->
+
+<div class="row mt-5">
+
+<!-- ULTIMOS TICKETS -->
+
+<div class="col-lg-8">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+<i class="bi bi-clock-history"></i>
+
+Últimos 5 Tickets
+
+</div>
+
+<div class="card-body table-responsive">
+    
+<table class="table table-hover">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>ID</th>
+
+<th>Título</th>
+
+<th>Estado</th>
+
+<th>Prioridad</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for ticket in ultimos_tickets %}
+
+<tr>
+
+<td>
+#{{ ticket[0] }}
+</td>
+
+<td>
+{{ ticket[1] }}
+</td>
+
+<td>
+{{ ticket[2] }}
+</td>
+
+<td>
+{{ ticket[3] }}
+</td>
+
+</tr>
+
+{% else %}
+
+<tr>
+
+<td colspan="4" class="text-center">
+
+No existen tickets.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- RANKING TECNICOS -->
+
+<div class="col-lg-4">
+
+<div class="card shadow">
+
+<div class="card-header bg-success text-white">
+
+<i class="bi bi-trophy-fill"></i>
+
+Ranking Técnicos
+
+</div>
+
+<div class="card-body">
+
+<table class="table">
+
+<thead>
+
+<tr>
+
+<th>#</th>
+
+<th>Técnico</th>
+
+<th>Cerrados</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for tecnico in ranking_tecnicos %}
+
+<tr>
+
+
+<td>
+#{{ loop.index }}
+</td>
+
+<td>
+{{ tecnico[0] }}
+</td>
+
+<td>
+{{ tecnico[1] }}
+</td>
+
+</tr>
+
+{% else %}
+
+<tr>
+
+<td colspan="3" class="text-center">
+
+No existen registros.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- GRAFICOS ESTADO Y PRIORIDAD -->
+
+<div class="row mt-5">
+
+<!-- GRAFICO ESTADO -->
+
+<div class="col-lg-6 mb-4">
+
+<div class="card shadow">
+
+<div class="card-header bg-dark text-white">
+
+<i class="bi bi-pie-chart-fill"></i>
+
+Tickets por Estado
+
+</div>
+
+<div class="card-body">
+
+<canvas id="graficoEstado"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+    <!-- GRAFICO PRIORIDAD -->
+
+    <div class="col-lg-6 mb-4">
+
+    <div class="card shadow">
+
+    <div class="card-header bg-warning">
+
+    <i class="bi bi-bar-chart-fill"></i>
+
+    Tickets por Prioridad
+
+    </div>
+
+    <div class="card-body">
+
+    <canvas id="graficoPrioridad"></canvas>
+
+    </div>
+
+    </div>
+
+    </div>
+
+    </div>
+
+    <!-- GRAFICO CATEGORIA -->
+
+
+    <div class="row mt-4">
+
+
+    <div class="col-lg-12">
+
+
+    <div class="card shadow">
+
+
+    <div class="card-header bg-info text-white">
+
+
+    <i class="bi bi-folder-fill"></i>
+
+
+    Tickets por Categoría
+
+
+    </div>
+
+
+
+    <div class="card-body">
+
+
+    <canvas id="graficoCategoria"></canvas>
+
+
+    </div>
+
+
+
+    </div>
+
+
+    </div>
+
+
+    </div>
+
+    <!-- CHART JS -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+    <script>
+
+
+    // =============================
+    // GRAFICO ESTADOS
+    // =============================
+
+
+    new Chart(
+    document.getElementById("graficoEstado"),
+    {
+
+
+    type:"doughnut",
+
+
+    data:{
+
+
+    labels:[
+
+    {% for item in tickets_estado %}
+
+    "{{ item[0] }}",
+
+    {% endfor %}
+
+    ],
+
+
+    datasets:[{
+
+
+    data:[
+
+    {% for item in tickets_estado %}
+
+    {{ item[1] }},
+
+    {% endfor %}
+
+    ]
+
+
+    }]
+
+
+    },
+
+
+    options:{
+
+
+    responsive:true,
+
+
+    plugins:{
+
+
+    legend:{
+
+
+    position:"bottom"
+
+
+    }
+
+
+    }
+
+
+    }
+
+
+
+    });
+
+    // =============================
+    // GRAFICO PRIORIDAD
+    // =============================
+
+
+    new Chart(
+    document.getElementById("graficoPrioridad"),
+    {
+
+
+    type:"bar",
+
+
+    data:{
+
+
+    labels:[
+
+    {% for item in tickets_prioridad %}
+
+    "{{ item[0] }}",
+
+    {% endfor %}
+
+    ],
+
+
+
+    datasets:[{
+
+
+    label:"Cantidad de Tickets",
+
+
+    data:[
+
+
+    {% for item in tickets_prioridad %}
+
+    {{ item[1] }},
+
+    {% endfor %}
+
+
+    ]
+
+
+    }]
+
+
+    },
+
+
+
+    options:{
+
+
+    responsive:true,
+
+
+    scales:{
+
+
+    y:{
+
+
+    beginAtZero:true,
+
+
+    ticks:{
+
+
+    precision:0
+    }
+    }
+    }
+    }
+    });
+
+    // =============================
+    // GRAFICO CATEGORIAS
+    // =============================
+
+
+    new Chart(
+    document.getElementById("graficoCategoria"),
+    {
+
+
+    type:"pie",
+
+
+    data:{
+
+
+    labels:[
+
+    {% for item in tickets_categoria %}
+
+    "{{ item[0] }}",
+
+    {% endfor %}
+
+    ],
+
+
+
+    datasets:[{
+
+
+    label:"Categorías",
+
+
+    data:[
+
+
+    {% for item in tickets_categoria %}
+
+    {{ item[1] }},
+
+    {% endfor %}
+
+
+    ]
+
+
+    }]
+
+
+    },
+
+
+
+    options:{
+
+
+    responsive:true,
+
+
+    plugins:{
+
+
+    legend:{
+
+
+    position:"bottom"
+
+
+    }
+
+
+    }
+
+
+
+    }
+
+
+
+    });
+
+
+
+    </script>
+
+
+
+
+
+    </div>
+
+
+    {% endblock %}

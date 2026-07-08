@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block titulo %}Panel Usuario{% endblock %}
+
+{% block contenido %}
+
+<div class="container">
+
+    <h2>Panel Usuario</h2>
+
+    <h5>Bienvenido {{ session.get("usuario") }}</h5>
+
+    {% if tickets_abiertos|default(0) > 0 %}
+        <div class="alert alert-warning mt-3">
+            🔔 Tienes {{ tickets_abiertos }} tickets abiertos.
+        </div>
+    {% else %}
+        <div class="alert alert-success mt-3">
+            ✅ No tienes tickets abiertos.
+        </div>
+    {% endif %}
+
+    <!-- Cards -->
+    <div class="row mt-4">
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h5>Total Tickets</h5>
+                    <h1 class="text-primary">{{ tickets_totales|default(0) }}</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h5>Abiertos</h5>
+                    <h1 class="text-warning">{{ tickets_abiertos|default(0) }}</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h5>Cerrados</h5>
+                    <h1 class="text-success">{{ tickets_cerrados|default(0) }}</h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Últimos tickets -->
+    <div class="card mt-4 shadow">
+
+        <div class="card-header bg-primary text-white">
+            Últimos Tickets
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-striped">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for ticket in ultimos_tickets|default([]) %}
+
+                    <tr>
+                        <td>{{ ticket[0] }}</td>
+                        <td>{{ ticket[1] }}</td>
+                        <td>{{ ticket[2] }}</td>
+                        <td>{{ ticket[3] }}</td>
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">
+                            No hay tickets registrados.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
