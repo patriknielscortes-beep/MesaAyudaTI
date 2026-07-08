@@ -3,7 +3,21 @@
 ![Dashboard Administrador](screenshots/dashboard-admin.png)
 
 
+
 Sistema web de Mesa de Ayuda TI desarrollado con Flask.
+
+
+
+## Capturas del sistema
+
+### Inicio de sesión
+![Login](screenshots/login.png)
+
+### Gestión de tickets
+![Tickets](screenshots/tickets.png)
+
+### Estadísticas
+![Estadísticas](screenshots/estadisticas.png)
 
 
 
