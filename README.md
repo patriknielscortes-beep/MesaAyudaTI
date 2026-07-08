@@ -1,5 +1,6 @@
 \# MesaAyudaTI
 
+![Dashboard Administrador](screenshots/dashboard-admin.png)
 
 
 Sistema web de Mesa de Ayuda TI desarrollado con Flask.
