@@ -84,3 +84,20 @@ pip install -r requirements.txt
 - 📊 Estadísticas y gráficos
 - 🔎 Búsqueda de tickets
 - 📝 Auditoría del sistema
+
+## Usuarios de prueba
+
+Ejemplos de perfiles disponibles:
+
+| Usuario | Rol |
+|---------|-----|
+| admin | Administrador |
+| tecnico1 | Técnico |
+| usuario1 | Usuario |
+
+## Ejecución del sistema
+
+1. Instalar dependencias:
+
+```bash
+pip install -r requirements.txt
