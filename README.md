@@ -73,3 +73,14 @@ Instalar dependencias:
 
 pip install -r requirements.txt
 
+
+## Módulos del sistema
+
+- 🔐 Autenticación de usuarios
+- 👥 Gestión de roles
+- 🎫 Creación y seguimiento de tickets
+- 👨‍💻 Asignación de técnicos
+- 📋 Historial de atención
+- 📊 Estadísticas y gráficos
+- 🔎 Búsqueda de tickets
+- 📝 Auditoría del sistema
