@@ -3,11 +3,6 @@
 ![Dashboard Administrador](screenshots/dashboard-admin.png)
 
 
-
-Sistema web de Mesa de Ayuda TI desarrollado con Flask.
-
-
-
 ## Capturas del sistema
 
 ### Inicio de sesión
@@ -19,6 +14,9 @@ Sistema web de Mesa de Ayuda TI desarrollado con Flask.
 ### Estadísticas
 ![Estadísticas](screenshots/estadisticas.png)
 
+
+
+Sistema web de Mesa de Ayuda TI desarrollado con Flask.
 
 
 \## Tecnologías utilizadas
